@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter( { subsets : ["latin"] } );
 
@@ -13,14 +14,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className}`}>
-        {/* header */}
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${inter.className}`}>
+          {/* header */}
           <Header />
-        <main className="min-h-screen"> {children} </main>
-        {/* footer */}
-       <Footer />
-      </body>
-    </html>
+          <main className="min-h-screen"> {children} </main>
+          {/* footer */}
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
