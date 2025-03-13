@@ -22,8 +22,8 @@ export default function RootLayout({ children }) {
           {/* header */}
           <Header  />
           <main className=""> {children} </main>
-          <HeroSection />
-          <AnimateLogo />
+          {/* <HeroSection />
+          <AnimateLogo /> */}
           {/* footer */}
           <Footer />
         </body>

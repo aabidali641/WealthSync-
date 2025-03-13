@@ -5,6 +5,20 @@ import {
   CreditCard,
   Globe,
   Zap,
+  
+  TrendingUp,
+ 
+  PiggyBank,
+  PiggyBankIcon,
+  LucidePiggyBank,
+  Banknote,
+  Coins,
+  BanknoteIcon,
+  LucideBanknote,
+  ShieldCheck,
+  UserPlus,
+  ReceiptText,
+  Lightbulb,
 } from "lucide-react";
 
 // Stats Data
@@ -66,22 +80,40 @@ export const featuresData = [
 // How It Works Data
 export const howItWorksData = [
   {
-    icon: <CreditCard className="h-8 w-8 text-blue-600" />,
+    icon: <UserPlus className="h-8 w-8 text-blue-600" />,
     title: "1. Create Your Account",
     description:
       "Get started in minutes with our simple and secure sign-up process",
   },
   {
-    icon: <BarChart3 className="h-8 w-8 text-blue-600" />,
+    icon: <ReceiptText className="h-8 w-8 text-blue-600" />,
     title: "2. Track Your Spending",
     description:
       "Automatically categorize and track your transactions in real-time",
   },
   {
-    icon: <PieChart className="h-8 w-8 text-blue-600" />,
+    icon: <Lightbulb className="h-8 w-8 text-blue-600" />,
     title: "3. Get Insights",
     description:
       "Receive AI-powered insights and recommendations to optimize your finances",
+  },
+  {
+    icon: <TrendingUp className="h-8 w-8 text-blue-600" />,
+    title: "4. Set Financial Goals",
+    description:
+      "Define your short-term and long-term financial goals and track your progress effortlessly.",
+  },
+  {
+    icon: <LucideBanknote className="h-8 w-8 text-blue-600" />,
+    title: "5. Smart Budgeting",
+    description:
+      "Create customized budgets based on your spending habits and receive alerts to stay on track.",
+  },
+  {
+    icon: <ShieldCheck className="h-8 w-8 text-blue-600" />,
+    title: "6. Secure & Sync",
+    description:
+      "Securely connect your bank accounts and sync all your financial data in one place.",
   },
 ];
 
