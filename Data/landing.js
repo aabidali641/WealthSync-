@@ -5,15 +5,7 @@ import {
   CreditCard,
   Globe,
   Zap,
-  
   TrendingUp,
- 
-  PiggyBank,
-  PiggyBankIcon,
-  LucidePiggyBank,
-  Banknote,
-  Coins,
-  BanknoteIcon,
   LucideBanknote,
   ShieldCheck,
   UserPlus,
