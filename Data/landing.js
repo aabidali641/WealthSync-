@@ -132,4 +132,26 @@ export const testimonialsData = [
     quote:
       "I recommend Welth to all my clients. The multi-currency support and detailed analytics make it perfect for international investors.",
   },
+  {
+    name: "David Thompson",
+    role: "E-commerce Entrepreneur",
+    image: "https://randomuser.me/api/portraits/men/76.jpg",
+    quote:
+      "Managing cash flow has never been easier. Welth gives me real-time insights that help me make better financial decisions for my business.",
+  },
+  {
+    name: "Sophia Lee",
+    role: "Startup Founder",
+    image: "https://randomuser.me/api/portraits/women/76.jpg",
+    quote:
+      "Welth's automation features have been a game-changer for my startup. I can track expenses effortlessly and focus on growing my business.",
+  },
+  {
+    name: "James Wilson",
+    role: "Investor",
+    image: "https://randomuser.me/api/portraits/men/74.jpg",
+    quote:
+      "As an investor, I need accurate financial data at my fingertips. Welth provides deep analytics and reports that keep me ahead of the game.",
+  },
 ];
+
