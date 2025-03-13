@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
@@ -122,5 +127,68 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+
+
+@layer utilities {
+  .gradient {
+    @apply bg-gradient-to-br from-blue-600 to-purple-600;
+  }
+
+  .gradient-title {
+    @apply bg-gradient-to-br from-blue-600 to-purple-600 font-extrabold tracking-tighter pr-2 pb-2 text-transparent bg-clip-text;
+  }
+}
+
+.hero-image-wrapper {
+  perspective: 1000px;
+}
+
+.hero-image {
+  /* transform: rotateX(20deg) scale(0.9) translateY(-50); */
+  transform: rotateX(55deg) scale(1);
+  transition: transform 1.5s ease-out;
+  will-change: transform;
+}
+
+.hero-image.scrolled {
+  transform: rotateX(0deg) scale(1) translateY(50px);
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add this class */
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientMove 3s ease infinite;
+}
+
+@media (max-width: 490px) {
+  .animate-text {
+    font-size: 18px !important; /* Pehla stage (490px se neeche) */
+  }
+}
+
+@media (max-width: 400px) {
+  .animate-text {
+    font-size: 14px !important; /* Dusra stage (400px se neeche) */
+  }
+}
+
+@media (max-width: 320px) {
+  .animate-text {
+    font-size: 10px !important; /* Teesra stage (320px se neeche) */
   }
 }

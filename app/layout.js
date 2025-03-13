@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
+import HeroSection from "@/components/Hero";
+import AnimateLogo from "@/components/AnimateLogo";
 
 const inter = Inter( { subsets : ["latin"] } );
 
@@ -19,7 +21,9 @@ export default function RootLayout({ children }) {
         <body className={`${inter.className}`}>
           {/* header */}
           <Header  />
-          <main className="min-h-screen"> {children} </main>
+          <main className=""> {children} </main>
+          <HeroSection />
+          <AnimateLogo />
           {/* footer */}
           <Footer />
         </body>
