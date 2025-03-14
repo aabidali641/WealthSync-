@@ -37,6 +37,7 @@
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
+    "prisma": "^6.5.0",
     "tailwindcss": "^4"
   }
 }
