@@ -1,5 +1,4 @@
-@tailwind base;
-@tailwind components;
+
 @tailwind utilities;
 
 
@@ -190,5 +189,38 @@
 @media (max-width: 320px) {
   .animate-text {
     font-size: 10px !important; /* Teesra stage (320px se neeche) */
+  }
+}
+
+
+@layer utilities {
+  .gradient {
+    @apply bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500;
+  }
+
+  .gradient-title {
+    @apply bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 font-extrabold tracking-tighter pr-2 pb-2 text-transparent bg-clip-text;
+  }
+}
+
+
+@layer utilities {
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent;
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #7e22ce, #2563eb); /* Purple to Blue */
+    border-radius: 5px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #1e1e1e; /* Dark background for contrast */
   }
 }
