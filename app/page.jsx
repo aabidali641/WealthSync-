@@ -15,6 +15,7 @@ import HeroSection from "@/components/Hero";
 import Link from "next/link";
 import AnimateLogo from "@/components/AnimateLogo";
 import CustomScroll from "@/components/CustomScroll";
+import FAQSection from "@/components/FAQSection";
 
 export function Page() {
   return <CustomScroll />;
@@ -334,6 +335,7 @@ const LandingPage = () => {
           </Link>
         </div>
       </section>
+      <FAQSection />
     </div>
   );
 };
