@@ -16,7 +16,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   useEffect(() => {
-    toast.success("Welcome to WealthSync!", {
+    toast.success("Welcome to WealthSync! 😊 ", {
       position: "top-right",
       autoClose: 3000,
     });
