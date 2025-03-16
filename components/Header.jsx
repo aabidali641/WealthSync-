@@ -1,24 +1,13 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "./ui/button";
-import { PenBox, LayoutDashboard, Loader2 } from "lucide-react";
+import { PenBox, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { checkUser } from "@/lib/checkUser";
 import Image from "next/image";
 
-const Header = () => {
-  const [loading, setLoading] = useState(false);
-
-  const handleLogin = () => {
-    setLoading(true);
-
-    // Simulating an async login request (replace this with actual login logic)
-    setTimeout(() => {
-      setLoading(false);
-      console.log("User Logged In!");
-    }, 2000);
-  };
+const Header = async () => {
+  await checkUser();
 
   return (
     <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
@@ -26,7 +15,7 @@ const Header = () => {
         <Link href="/">
           <Image
             src={"/logo.png"}
-            alt="Wealth Logo"
+            alt="Welth Logo"
             width={200}
             height={60}
             className="h-12 w-auto object-contain"
@@ -69,19 +58,7 @@ const Header = () => {
           </SignedIn>
           <SignedOut>
             <SignInButton forceRedirectUrl="/dashboard">
-              <Button
-                variant="outline"
-                onClick={handleLogin}
-                disabled={loading}
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Loading...
-                  </>
-                ) : (
-                  "Login"
-                )}
-              </Button>
+              <Button variant="outline">Login</Button>
             </SignInButton>
           </SignedOut>
           <SignedIn>

@@ -1,40 +1,33 @@
-"use client"; // This must be at the top
-
-import { Container } from "lucide-react";
-import "./globals.css";
 import { Inter } from "next/font/google";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import "./globals.css";
+import Header from "@/components/header";
 import { ClerkProvider } from "@clerk/nextjs";
-import HeroSection from "@/components/Hero";
-import AnimateLogo from "@/components/AnimateLogo";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
+import { Toaster , toast } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({ children }) {
-  useEffect(() => {
-    toast.success("Welcome to WealthSync! 😊 ", {
-      position: "top-right",
-      autoClose: 3000,
-    });
-  }, []);
+export const metadata = {
+  title: "Welth",
+  description: "One stop Finance Platform",
+};
 
+export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
+        <head>
+          <link rel="icon" href="/logo-sm.png" sizes="any" />
+        </head>
         <body className={`${inter.className}`}>
-          {/* header */}
           <Header />
-          <main className="">{children}</main>
-          {/* Toast Notifications */}
-          <ToastContainer position="top-right" autoClose={3000} />
-          {/* <HeroSection />
-          <AnimateLogo /> */}
-          {/* footer */}
-          <Footer />
+          <main className="min-h-screen">{children}</main>
+          <Toaster richColors />
+
+          <footer className="bg-blue-50 py-12">
+            <div className="container mx-auto px-4 text-center text-gray-600">
+              <p>Made with 💗 by Aabid ALi</p>
+            </div>
+          </footer>
         </body>
       </html>
     </ClerkProvider>

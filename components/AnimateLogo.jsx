@@ -30,6 +30,7 @@ const AnimateLogo = () => {
         alt="Animated Logo"
         className="mx-auto w-full max-w-[1000px] h-auto"
         priority
+        
       />
     </div>
   );
