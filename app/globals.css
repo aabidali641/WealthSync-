@@ -271,3 +271,13 @@
 .animate-spin-slow {
   animation: spin-slow 20s infinite linear;
 }
+
+
+.cl-footer div span {
+  display: none !important;
+}
+
+/* Hide iframe if Clerk is using any embedded service */
+iframe[src*="clerk"] {
+  display: none !important;
+}
