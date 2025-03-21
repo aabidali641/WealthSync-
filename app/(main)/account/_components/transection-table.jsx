@@ -48,8 +48,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
+
 import { cn } from "@/lib/utils";
-import { categoryColors } from "@/data/categories";
+import { categoryColors } from "@/Data/categories";
 import { bulkDeleteTransactions } from "@/actions/account";
 import useFetch from "@/hooks/use-fetch";
 import { BarLoader } from "react-spinners";
