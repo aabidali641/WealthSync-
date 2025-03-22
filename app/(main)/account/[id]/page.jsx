@@ -1,13 +1,18 @@
 import { Suspense } from "react";
 import { getAccountWithTransactions } from "@/actions/account";
 import { BarLoader } from "react-spinners";
+import { TransactionTable } from "../_components/transaction-table";
 import { notFound } from "next/navigation";
 import { AccountChart } from "../_components/account-chart";
-import { TransactionTable } from "../_components/transection-table";
-
 
 export default async function AccountPage({ params }) {
-  const accountData = await getAccountWithTransactions(params.id);
+  // ✅ Ensure params is awaited if it's a promise
+  const resolvedParams = await params;
+
+  // ✅ Now destructure after ensuring it's resolved
+  const { id } = resolvedParams;
+
+  const accountData = await getAccountWithTransactions(id);
 
   if (!accountData) {
     notFound();
@@ -54,3 +59,4 @@ export default async function AccountPage({ params }) {
     </div>
   );
 }
+
