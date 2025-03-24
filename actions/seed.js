@@ -3,8 +3,8 @@
 import { db } from "@/lib/prisma";
 import { subDays } from "date-fns";
 
-const ACCOUNT_ID = "account-id";
-const USER_ID = "user-id";
+const ACCOUNT_ID = "23a72027-c05b-4de2-aa05-1cb05b9b9a81";
+const USER_ID = "85582819-e303-4c60-b876-d93d9af21089";
 
 // Categories with their typical amount ranges
 const CATEGORIES = {
@@ -43,25 +43,37 @@ function getRandomCategory(type) {
 
 export async function seedTransactions() {
   try {
+    // Check if user and account exist
+    const user = await db.user.findUnique({
+      where: { id: USER_ID },
+    });
+    const account = await db.account.findUnique({
+      where: { id: ACCOUNT_ID },
+    });
+
+    if (!user || !account) {
+      throw new Error("User or Account not found. Please seed them first.");
+    }
+
     // Generate 90 days of transactions
     const transactions = [];
     let totalBalance = 0;
 
+    // Old Code ko replace karo is section se:
+    
+
     for (let i = 90; i >= 0; i--) {
       const date = subDays(new Date(), i);
-
-      // Generate 1-3 transactions per day
       const transactionsPerDay = Math.floor(Math.random() * 3) + 1;
 
       for (let j = 0; j < transactionsPerDay; j++) {
-        // 40% chance of income, 60% chance of expense
         const type = Math.random() < 0.4 ? "INCOME" : "EXPENSE";
         const { category, amount } = getRandomCategory(type);
 
         const transaction = {
           id: crypto.randomUUID(),
           type,
-          amount,
+          amount: parseFloat(amount), // ✅ Ensure it's a number
           description: `${
             type === "INCOME" ? "Received" : "Paid for"
           } ${category}`,
@@ -74,7 +86,8 @@ export async function seedTransactions() {
           updatedAt: date,
         };
 
-        totalBalance += type === "INCOME" ? amount : -amount;
+        totalBalance +=
+          type === "INCOME" ? parseFloat(amount) : -parseFloat(amount);
         transactions.push(transaction);
       }
     }
@@ -100,7 +113,7 @@ export async function seedTransactions() {
 
     return {
       success: true,
-      message: `Created ${transactions.length} transactions`,
+      message: `Created ${transactions.length} transactions successfully!`,
     };
   } catch (error) {
     console.error("Error seeding transactions:", error);
