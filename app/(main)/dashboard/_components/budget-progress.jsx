@@ -34,12 +34,19 @@ export function BudgetProgress({ initialBudget, currentExpenses }) {
     ? (currentExpenses / initialBudget.amount) * 100
     : 0;
 
+  // ✅ Updated handleUpdateBudget with 100% limit check
   const handleUpdateBudget = async () => {
     const amount = parseFloat(newBudget);
 
     if (isNaN(amount) || amount <= 0) {
       toast.error("Please enter a valid amount");
       return;
+    }
+
+    // ❗️ Check if current expenses exceed the new budget amount
+    if (currentExpenses > amount) {
+      toast.error("Budget limit will exceed. Update not allowed.");
+      return; // Prevent updating the budget
     }
 
     await updateBudgetFn(amount);
@@ -114,7 +121,7 @@ export function BudgetProgress({ initialBudget, currentExpenses }) {
                   onClick={() => setIsEditing(true)}
                   className="h-6 w-6"
                 >
-                  <Pencil className="h-3 w-3" />
+                  <Pencil className="h-4 w-4" />
                 </Button>
               </>
             )}
@@ -127,12 +134,11 @@ export function BudgetProgress({ initialBudget, currentExpenses }) {
             <Progress
               value={percentUsed}
               extraStyles={`${
-                // add to Progress component
-                percentUsed >= 90
+                percentUsed >= 85
                   ? "bg-red-500"
-                  : percentUsed >= 75
-                  ? "bg-yellow-500"
-                  : "bg-green-500"
+                  : percentUsed >= 60
+                    ? "bg-yellow-500"
+                    : "bg-green-500"
               }`}
             />
             <p className="text-xs text-muted-foreground text-right">
