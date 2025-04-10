@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "email": "email dev"
   },
   "dependencies": {
     "@arcjet/next": "^1.0.0-beta.4",
@@ -51,6 +52,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
     "prisma": "^6.5.0",
+    "react-email": "3.0.7",
     "tailwindcss": "^4"
   }
 }
