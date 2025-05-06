@@ -45,3 +45,16 @@
 ```bash
 git clone https://github.com/yourusername/wealthsync.git
 cd wealthsync
+
+npm install
+# or
+yarn install
+
+
+DATABASE_URL=your_database_url
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+
+4. Setup Prisma
+npx prisma generate
+npx prisma migrate dev --name init
