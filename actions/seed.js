@@ -44,12 +44,8 @@ function getRandomCategory(type) {
 export async function seedTransactions() {
   try {
     // Check if user and account exist
-    const user = await db.user.findUnique({
-      where: { id: USER_ID },
-    });
-    const account = await db.account.findUnique({
-      where: { id: ACCOUNT_ID },
-    });
+    const user = await db.user.findUnique({ where: { id: USER_ID } });
+    const account = await db.account.findUnique({ where: { id: ACCOUNT_ID } });
 
     if (!user || !account) {
       throw new Error("User or Account not found. Please seed them first.");
@@ -60,7 +56,6 @@ export async function seedTransactions() {
     let totalBalance = 0;
 
     // Old Code ko replace karo is section se:
-    
 
     for (let i = 90; i >= 0; i--) {
       const date = subDays(new Date(), i);
@@ -95,14 +90,10 @@ export async function seedTransactions() {
     // Insert transactions in batches and update account balance
     await db.$transaction(async (tx) => {
       // Clear existing transactions
-      await tx.transaction.deleteMany({
-        where: { accountId: ACCOUNT_ID },
-      });
+      await tx.transaction.deleteMany({ where: { accountId: ACCOUNT_ID } });
 
       // Insert new transactions
-      await tx.transaction.createMany({
-        data: transactions,
-      });
+      await tx.transaction.createMany({ data: transactions });
 
       // Update account balance
       await tx.account.update({

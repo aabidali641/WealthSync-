@@ -9,40 +9,14 @@ import {
   Text,
 } from "@react-email/components";
 
-// Dummy data for preview
-const PREVIEW_DATA = {
-  monthlyReport: {
-    userName: "John Doe",
-    type: "monthly-report",
-    data: {
-      month: "December",
-      stats: {
-        totalIncome: 5000,
-        totalExpenses: 3500,
-        byCategory: {
-          housing: 1500,
-          groceries: 600,
-          transportation: 400,
-          entertainment: 300,
-          utilities: 700,
-        },
-      },
-      insights: [
-        "Your housing expenses are 43% of your total spending - consider reviewing your housing costs.",
-        "Great job keeping entertainment expenses under control this month!",
-        "Setting up automatic savings could help you save 20% more of your income.",
-      ],
-    },
-  },
-  budgetAlert: {
-    userName: "John Doe",
-    type: "budget-alert",
-    data: {
-      percentageUsed: 85,
-      budgetAmount: 4000,
-      totalExpenses: 3400,
-    },
-  },
+// Enhanced default data structure matching your format
+const DEFAULT_DATA = {
+  month: "this month",
+  stats: { totalIncome: 0, totalExpenses: 0, byCategory: {} },
+  insights: [],
+  percentageUsed: 0,
+  budgetAmount: 0,
+  totalExpenses: 0,
 };
 
 export default function EmailTemplate({
@@ -50,6 +24,20 @@ export default function EmailTemplate({
   type = "monthly-report",
   data = {},
 }) {
+  // Safely merge incoming data with defaults
+  const mergedData = {
+    ...DEFAULT_DATA,
+    ...data,
+    stats: {
+      ...DEFAULT_DATA.stats,
+      ...data.stats,
+      byCategory: {
+        ...DEFAULT_DATA.stats.byCategory,
+        ...data.stats?.byCategory,
+      },
+    },
+  };
+
   if (type === "monthly-report") {
     return (
       <Html>
@@ -59,43 +47,40 @@ export default function EmailTemplate({
           <Container style={styles.container}>
             <Heading style={styles.title}>Monthly Financial Report</Heading>
 
-            <Text style={styles.text}>Hello {userName},</Text>
+            <Text style={styles.text}>Hello {userName || "User"},</Text>
             <Text style={styles.text}>
-              Here&rsquo;s your financial summary for{" "}
-              {data?.month || "this month"}:
+              Here&rsquo;s your financial summary for {mergedData.month}:
             </Text>
 
-            {/* Main Stats */}
-            {data?.stats && (
-              <Section style={styles.statsContainer}>
-                <div style={styles.stat}>
-                  <Text style={styles.text}>Total Income</Text>
-                  <Text style={styles.heading}>
-                    ${data?.stats?.totalIncome ?? 0}
-                  </Text>
-                </div>
-                <div style={styles.stat}>
-                  <Text style={styles.text}>Total Expenses</Text>
-                  <Text style={styles.heading}>
-                    ${data?.stats?.totalExpenses ?? 0}
-                  </Text>
-                </div>
-                <div style={styles.stat}>
-                  <Text style={styles.text}>Net</Text>
-                  <Text style={styles.heading}>
-                    $
-                    {(data?.stats?.totalIncome ?? 0) -
-                      (data?.stats?.totalExpenses ?? 0)}
-                  </Text>
-                </div>
-              </Section>
-            )}
+            {/* Main Stats - Always visible with defaults */}
+            <Section style={styles.statsContainer}>
+              <div style={styles.stat}>
+                <Text style={styles.text}>Total Income</Text>
+                <Text style={styles.heading}>
+                  ${mergedData.stats.totalIncome}
+                </Text>
+              </div>
+              <div style={styles.stat}>
+                <Text style={styles.text}>Total Expenses</Text>
+                <Text style={styles.heading}>
+                  ${mergedData.stats.totalExpenses}
+                </Text>
+              </div>
+              <div style={styles.stat}>
+                <Text style={styles.text}>Net</Text>
+                <Text style={styles.heading}>
+                  $
+                  {mergedData.stats.totalIncome -
+                    mergedData.stats.totalExpenses}
+                </Text>
+              </div>
+            </Section>
 
-            {/* Category Breakdown */}
-            {data?.stats?.byCategory && (
+            {/* Category Breakdown - Only if categories exist */}
+            {Object.keys(mergedData.stats.byCategory).length > 0 && (
               <Section style={styles.section}>
                 <Heading style={styles.heading}>Expenses by Category</Heading>
-                {Object.entries(data?.stats?.byCategory).map(
+                {Object.entries(mergedData.stats.byCategory).map(
                   ([category, amount]) => (
                     <div key={category} style={styles.row}>
                       <Text style={styles.text}>{category}</Text>
@@ -106,11 +91,11 @@ export default function EmailTemplate({
               </Section>
             )}
 
-            {/* AI Insights */}
-            {data?.insights && data.insights.length > 0 && (
+            {/* AI Insights - Only if insights exist */}
+            {mergedData.insights && mergedData.insights.length > 0 && (
               <Section style={styles.section}>
                 <Heading style={styles.heading}>Welth Insights</Heading>
-                {data.insights.map((insight, index) => (
+                {mergedData.insights.map((insight, index) => (
                   <Text key={index} style={styles.text}>
                     • {insight}
                   </Text>
@@ -136,45 +121,40 @@ export default function EmailTemplate({
         <Body style={styles.body}>
           <Container style={styles.container}>
             <Heading style={styles.title}>Budget Alert</Heading>
-            <Text style={styles.text}>Hello {userName},</Text>
+            <Text style={styles.text}>Hello {userName || "User"},</Text>
             <Text style={styles.text}>
-              You&rsquo;ve used {data?.percentageUsed?.toFixed(1) ?? "0.0"}% of
-              your monthly budget.
+              You&rsquo;ve used {mergedData.percentageUsed.toFixed(1)}% of your
+              monthly budget.
             </Text>
-            {data && (
-              <Section style={styles.statsContainer}>
-                <div style={styles.stat}>
-                  <Text style={styles.text}>Budget Amount</Text>
-                  <Text style={styles.heading}>${data?.budgetAmount ?? 0}</Text>
-                </div>
-                <div style={styles.stat}>
-                  <Text style={styles.text}>Spent So Far</Text>
-                  <Text style={styles.heading}>
-                    ${data?.totalExpenses ?? 0}
-                  </Text>
-                </div>
-                <div style={styles.stat}>
-                  <Text style={styles.text}>Remaining</Text>
-                  <Text style={styles.heading}>
-                    ${(data?.budgetAmount ?? 0) - (data?.totalExpenses ?? 0)}
-                  </Text>
-                </div>
-              </Section>
-            )}
+
+            <Section style={styles.statsContainer}>
+              <div style={styles.stat}>
+                <Text style={styles.text}>Budget Amount</Text>
+                <Text style={styles.heading}>${mergedData.budgetAmount}</Text>
+              </div>
+              <div style={styles.stat}>
+                <Text style={styles.text}>Spent So Far</Text>
+                <Text style={styles.heading}>${mergedData.totalExpenses}</Text>
+              </div>
+              <div style={styles.stat}>
+                <Text style={styles.text}>Remaining</Text>
+                <Text style={styles.heading}>
+                  ${mergedData.budgetAmount - mergedData.totalExpenses}
+                </Text>
+              </div>
+            </Section>
           </Container>
         </Body>
       </Html>
     );
   }
 
-  return null; // Default return if type doesn't match
+  return null;
 }
 
+// Your original styles preserved exactly
 const styles = {
-  body: {
-    backgroundColor: "#f6f9fc",
-    fontFamily: "-apple-system, sans-serif",
-  },
+  body: { backgroundColor: "#f6f9fc", fontFamily: "-apple-system, sans-serif" },
   container: {
     backgroundColor: "#ffffff",
     margin: "0 auto",
@@ -195,11 +175,7 @@ const styles = {
     fontWeight: "600",
     margin: "0 0 16px",
   },
-  text: {
-    color: "#4b5563",
-    fontSize: "16px",
-    margin: "0 0 16px",
-  },
+  text: { color: "#4b5563", fontSize: "16px", margin: "0 0 16px" },
   section: {
     marginTop: "32px",
     padding: "20px",
@@ -233,5 +209,37 @@ const styles = {
     marginTop: "32px",
     paddingTop: "16px",
     borderTop: "1px solid #e5e7eb",
+  },
+};
+
+// Preserving your PREVIEW_DATA for development
+export const PREVIEW_DATA = {
+  monthlyReport: {
+    userName: "John Doe",
+    type: "monthly-report",
+    data: {
+      month: "December",
+      stats: {
+        totalIncome: 5000,
+        totalExpenses: 3500,
+        byCategory: {
+          housing: 1500,
+          groceries: 600,
+          transportation: 400,
+          entertainment: 300,
+          utilities: 700,
+        },
+      },
+      insights: [
+        "Your housing expenses are 43% of your total spending - consider reviewing your housing costs.",
+        "Great job keeping entertainment expenses under control this month!",
+        "Setting up automatic savings could help you save 20% more of your income.",
+      ],
+    },
+  },
+  budgetAlert: {
+    userName: "John Doe",
+    type: "budget-alert",
+    data: { percentageUsed: 85, budgetAmount: 4000, totalExpenses: 3400 },
   },
 };
