@@ -10,7 +10,7 @@ import {
   howItWorksData,
   statsData,
   testimonialsData,
-} from "@/Data/landing";
+} from "@/data/landing";
 import HeroSection from "@/components/Hero";
 import Link from "next/link";
 import AnimateLogo from "@/components/AnimateLogo";
