@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "lint": "next lint",
-  "email": "email dev",
-  "postinstall": "prisma generate || echo \"Prisma not found, skipping\""
-},
-
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "email": "email dev",
+    "postinstall": "prisma generate || echo \"Prisma not found, skipping\"",
+    "check-casing": "node -e \"require('fs').readdirSync('./').forEach(f => console.log(f))\" | grep -i [dD]ata"
+  },
   "dependencies": {
     "@arcjet/next": "^1.0.0-beta.4",
     "@clerk/nextjs": "^6.30.0",
