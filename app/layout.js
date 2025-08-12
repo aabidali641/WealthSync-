@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster , toast } from "sonner";
 
