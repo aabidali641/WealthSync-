@@ -75,7 +75,10 @@ const HeroSection = () => {
               )}
             </Button>
           </Link>
-          <Link href="https://www.youtube.com/roadsidecoder" target="_blank">
+          <Link
+            href="https://wealth-sync-aabidali641s-projects.vercel.app/"
+            target="_blank"
+          >
             <Button
               onClick={() => handleClick("button5")}
               size="lg"
