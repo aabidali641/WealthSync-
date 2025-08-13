@@ -31,7 +31,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white custom-scrollbar">
+    <div className="min-h-screen bg-red custom-scrollbar">
       {/* Hero Section */}
       <HeroSection />
       <AnimateLogo />
@@ -311,7 +311,7 @@ const LandingPage = () => {
       {/* CTA Section */}
       <section className="py-20 bg-blue-600">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-semibold text-white mb-4 gradient-title text-4xl md:text-5xl sm:text-3xl">
+          <h2 className="font-semibold text-white mb-4  text-4xl md:text-5xl sm:text-3xl">
             Ready to Take Control of Your Finances?
           </h2>
           <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
