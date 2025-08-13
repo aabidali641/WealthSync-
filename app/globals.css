@@ -116,3 +116,155 @@ html {
   background-size: 200% 200%;
   animation: gradientMove 3s ease infinite;
 }
+
+
+@layer utilities {
+  .gradient {
+    @apply bg-gradient-to-br from-blue-600 to-purple-600;
+  }
+
+  .gradient-title {
+    @apply bg-gradient-to-br from-blue-600 to-purple-600 font-extrabold tracking-tighter pr-2 pb-2 text-transparent bg-clip-text;
+  }
+}
+
+.hero-image-wrapper {
+  perspective: 1000px;
+}
+
+.hero-image {
+  /* transform: rotateX(20deg) scale(0.9) translateY(-50); */
+  transform: rotateX(55deg) scale(1);
+  transition: transform 1.5s ease-out;
+  will-change: transform;
+}
+
+.hero-image.scrolled {
+  transform: rotateX(0deg) scale(1) translateY(50px);
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add this class */
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientMove 3s ease infinite;
+}
+
+@media (max-width: 490px) {
+  .animate-text {
+    font-size: 18px !important; /* Pehla stage (490px se neeche) */
+  }
+}
+
+@media (max-width: 400px) {
+  .animate-text {
+    font-size: 14px !important; /* Dusra stage (400px se neeche) */
+  }
+}
+
+@media (max-width: 320px) {
+  .animate-text {
+    font-size: 10px !important; /* Teesra stage (320px se neeche) */
+  }
+}
+
+
+@layer utilities {
+  .gradient {
+    @apply bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500;
+  }
+
+  .gradient-title {
+    @apply bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 font-extrabold tracking-tighter pr-2 pb-2 text-transparent bg-clip-text;
+  }
+}
+
+
+@layer utilities {
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent;
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #7e22ce, #2563eb); /* Purple to Blue */
+    border-radius: 5px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #1e1e1e; /* Dark background for contrast */
+  }
+}
+
+
+@keyframes glow {
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-glow {
+  animation: glow 5s infinite ease-in-out;
+}
+
+.animate-float {
+  animation: float 3s infinite ease-in-out;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s infinite linear;
+}
+
+
+.cl-footer div span {
+  display: none !important;
+}
+
+/* Hide iframe if Clerk is using any embedded service */
+iframe[src*="clerk"] {
+  display: none !important;
+}
