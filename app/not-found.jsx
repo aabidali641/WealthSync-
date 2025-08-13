@@ -13,14 +13,17 @@ export default function Custom404() {
           Lost in the Digital Void?
         </h2>
         <p className="text-lg text-white mt-2 max-w-md mx-auto">
-          Looks like you've wandered off the path. Don't worry, even the best
-          explorers get lost sometimes. Let's find your way back!
+          Looks like you&apos;ve wandered off the path. Don&apos;t worry, even
+          the best explorers get lost sometimes. Let&apos;s find your way back!
         </p>
         <div className="mt-8 space-y-4">
-          <p className="text-white text-sm">While you're here, did you know?</p>
+          <p className="text-white text-sm">
+            While you&apos;re here, did you know?
+          </p>
           <p className="text-white text-sm italic">
-            "The number 404 is often associated with missing web pages because
-            it's the HTTP status code for 'Not Found.'"
+            &quot;The number 404 is often associated with missing web pages
+            because it&apos;s the HTTP status code for &apos;Not
+            Found.&apos;&quot;
           </p>
         </div>
         <Link
